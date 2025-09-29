@@ -10,6 +10,7 @@ export default {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],            // Body text
         heading: ['Playfair Display', 'serif'],   // Hero & section titles
+        bungeespice: ['"Bungee Spice"', 'cursive'],       // <-- Add this line
       },
       keyframes: {
         fadeSlideUp: {
@@ -39,7 +40,6 @@ export default {
           900: '#111827',
         },
       },
-      // Optional: Add background opacity utilities if you want more control
       backgroundColor: {
         'black-90': 'rgba(0, 0, 0, 0.9)',
       },

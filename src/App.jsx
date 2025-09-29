@@ -1,27 +1,27 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import Navbar from "./components/Navbar";
-import headshot from "./assets/headshot.jpg"; // Put your headshot image in src/assets/
+import Skills from "./components/Skills";
+import TypingIntro from "./components/TypingIntro";
+import headshot from "./assets/headshot.jpg";
+import AnimatedHeading from './components/AnimatedHeading';
 
 function App() {
   useEffect(() => {
-    // Always dark mode - set class on mount
     document.documentElement.classList.add("dark");
   }, []);
 
   const projects = [
     {
       name: "Licious",
-      description:
-        "A website for meat & fish delivery service, includes an admin panel.",
+      description: "A website for meat & fish delivery service, includes an admin panel.",
       tech: ["React", "Node.js", "Express", "MongoDB"],
       live: "#",
       github: "https://github.com/SinghYogendra7/my-backend",
     },
     {
       name: "MindMate",
-      description:
-        "SaaS AI Bot built with Next.js, TypeScript, Stripe, Prisma ORM, MySQL.",
+      description: "SaaS AI Bot built with Next.js, TypeScript, Stripe, Prisma ORM, MySQL.",
       tech: ["Next.js", "TypeScript", "Stripe", "Prisma", "MySQL"],
       live: "#",
       github: "https://github.com/SinghYogendra7/my-backend",
@@ -35,8 +35,7 @@ function App() {
     },
     {
       name: "LinkedIn‑Auth Project",
-      description:
-        "Login/Signup project with Google Authentication and Firebase.",
+      description: "Login/Signup project with Google Authentication and Firebase.",
       tech: ["Firebase", "Google Auth", "React"],
       live: "#",
       github: "https://github.com/SinghYogendra7/my-backend",
@@ -44,28 +43,16 @@ function App() {
   ];
 
   const skills = [
-    "React",
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "Git / GitHub",
-    "Node.js",
-    "Express.js",
-    "MySQL",
-    "AWS",
-    "MongoDB",
+    "React", "HTML", "CSS", "JavaScript", "Git / GitHub",
+    "Node.js", "Express.js", "MySQL", "AWS", "MongoDB",
   ];
 
-  // Scroll-to-top function
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
-  // Animation Variants
   const containerVariants = {
     hidden: {},
     visible: {
-      transition: {
-        staggerChildren: 0.3,
-      },
+      transition: { staggerChildren: 0.3 },
     },
   };
 
@@ -97,11 +84,12 @@ function App() {
       </video>
 
       {/* Main Container */}
-      <div className="pt-24 min-h-screen relative z-20 bg-opacity-90 text-gray-100 font-sans transition-colors duration-500 max-w-5xl mx-auto px-6">
-        {/* Hero Section with animation and headshot */}
+      <div className="pt-24 min-h-screen relative z-20 bg-opacity-90 text-gray-100 font-sans transition-colors duration-500 max-w-5xl mx-auto px-6 sm:px-10">
+
+        {/* Hero Section */}
         <motion.section
           id="home"
-          className="mb-32 relative z-20 flex flex-col md:flex-row items-center justify-center text-center md:text-left"
+          className="mb-32 flex flex-col md:flex-row items-center justify-center text-center md:text-left"
           initial="hidden"
           animate="visible"
           variants={containerVariants}
@@ -110,40 +98,49 @@ function App() {
           <motion.img
             src={headshot}
             alt="Yogendra Singh"
-            className="w-40 h-40 rounded-full object-cover mb-6 md:mb-0 md:mr-12 shadow-lg border-4 border-indigo-600"
+            className="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover mb-6 md:mb-0 md:mr-12 shadow-lg border-4 border-indigo-600"
             variants={slideLeftFade}
           />
 
-          {/* Text Content */}
-          <div>
-            <motion.h1
-              className="text-4xl md:text-5xl font-bold mb-6 leading-tight font-heading"
-              variants={slideUpFade}
-            >
-              Hi, I&apos;m Yogendra Singh
-            </motion.h1>
+          {/* Typing Text Content */}
+          <div className="px-4 sm:px-0">
+            <TypingIntro /> {/* Typing Animation Component */}
 
-            <motion.p
-              className="text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0"
-              variants={slideUpFade}
-            >
-              Aspiring Software Developer based in Ahmedabad, India
-            </motion.p>
-
+            {/* Contact & Resume links - stacked on mobile, inline on md+ */}
             <motion.div
-              className="flex justify-center md:justify-start space-x-6 text-indigo-400 mt-6"
+              className="flex flex-col sm:flex-row justify-center md:justify-start space-y-3 sm:space-y-0 sm:space-x-10 mt-6 text-indigo-400 text-base sm:text-xl font-semibold"
               variants={slideUpFade}
             >
-              <a
+              <motion.a
                 href="mailto:cyogendrasingh@gmail.com"
-                className="hover:underline"
+                className="hover:underline cursor-pointer"
                 aria-label="Send Email"
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
               >
                 cyogendrasingh@gmail.com
-              </a>
-              <a href="tel:+919694892399" className="hover:underline" aria-label="Call Phone">
+              </motion.a>
+              <motion.a
+                href="tel:+919694892399"
+                className="hover:underline cursor-pointer"
+                aria-label="Call Phone"
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+              >
                 +91 9694892399
-              </a>
+              </motion.a>
+
+              <motion.a
+                href="/Yogendra_Singh.pdf"
+                download
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline cursor-pointer"
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                Download Resume
+              </motion.a>
             </motion.div>
           </div>
         </motion.section>
@@ -151,57 +148,36 @@ function App() {
         {/* About Section */}
         <motion.section
           id="about"
-          className="mb-16 max-w-3xl mx-auto text-center"
+          className="mb-16 max-w-3xl mx-auto text-center px-4 sm:px-0"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl font-semibold mb-4 text-indigo-600 font-heading">
+          <AnimatedHeading>
             About Me
-          </h2>
-          <p className="text-gray-300 leading-relaxed px-4">
+          </AnimatedHeading>
+          <p className="text-gray-300 leading-relaxed text-base sm:text-lg md:text-xl max-w-xl mx-auto">
             I am an Aspiring Full Stack Developer. Passionate about building efficient and scalable web applications.
           </p>
         </motion.section>
 
         {/* Skills Section */}
-        <motion.section
-          id="skills"
-          className="mb-16 max-w-4xl mx-auto"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          <h2 className="text-3xl font-semibold mb-6 text-indigo-600 text-center font-heading">
-            Skills
-          </h2>
-          <ul className="flex flex-wrap justify-center gap-4">
-            {skills.map((skill, idx) => (
-              <li
-                key={idx}
-                className="bg-indigo-700 bg-opacity-70 rounded-full px-4 py-2 text-sm md:text-base font-medium text-white"
-              >
-                {skill}
-              </li>
-            ))}
-          </ul>
-        </motion.section>
+        <Skills skills={skills} />
 
         {/* Projects Section */}
         <motion.section
           id="projects"
-          className="mb-24 max-w-5xl mx-auto"
+          className="mb-24 max-w-5xl mx-auto px-4 sm:px-0"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl font-semibold mb-8 text-indigo-600 text-center font-heading">
+          <AnimatedHeading>
             Projects
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          </AnimatedHeading>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
             {projects.map((proj, idx) => (
               <motion.div
                 key={idx}
@@ -209,9 +185,7 @@ function App() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <h3 className="text-xl font-semibold mb-2 text-indigo-400">
-                  {proj.name}
-                </h3>
+                <h3 className="text-xl font-semibold mb-2 text-indigo-400">{proj.name}</h3>
                 <p className="text-gray-300 mb-4">{proj.description}</p>
                 <p className="mb-4 text-sm">
                   <strong>Tech: </strong>
@@ -243,25 +217,35 @@ function App() {
         {/* Contact Section */}
         <motion.section
           id="contact"
-          className="mb-24 text-center max-w-3xl mx-auto"
+          className="mb-24 text-center max-w-3xl mx-auto px-4 sm:px-0"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <h2 className="text-3xl font-semibold mb-4 text-indigo-600 font-heading">
+          <AnimatedHeading>
             Contact Me
-          </h2>
-          <p className="mb-6 text-gray-300">
+          </AnimatedHeading>
+          <p className="mb-6 text-gray-300 text-base sm:text-lg md:text-xl max-w-xl mx-auto">
             If you’d like to work together or just say hi, feel free to reach out!
           </p>
-          <div className="flex justify-center space-x-6 text-indigo-400">
-            <a href="mailto:cyogendrasingh@gmail.com" className="hover:underline">
+          <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 text-indigo-400 text-xl sm:text-2xl font-semibold">
+            <motion.a
+              href="mailto:cyogendrasingh@gmail.com"
+              className="hover:underline cursor-pointer"
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+            >
               cyogendrasingh@gmail.com
-            </a>
-            <a href="tel:+919694892399" className="hover:underline">
+            </motion.a>
+            <motion.a
+              href="tel:+919694892399"
+              className="hover:underline cursor-pointer"
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+            >
               +91 9694892399
-            </a>
+            </motion.a>
           </div>
         </motion.section>
       </div>
